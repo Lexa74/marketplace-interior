@@ -2,6 +2,7 @@ import React from "react";
 import './cart-product.scss'
 import {IProduct} from "../../../../services/interfaces/goods";
 import {enumUrls} from "../../../Main/components/Product/imageUrls";
+import {Counter} from "../../../../shared/components/Counter/Counter";
 
 interface CartProductProps {
     productInCart: IProduct
@@ -29,7 +30,7 @@ export const CartProduct = ({productInCart}: CartProductProps) => {
                 </div>
             </div>
             <div className="product-in-cart__counter">
-                
+                <Counter productId={productInCart.id} min={1} max={5}/>
             </div>
         </div>
     )

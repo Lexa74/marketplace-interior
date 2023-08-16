@@ -6,6 +6,7 @@ export class GoodsStore {
   @observable allGoods: IGoods = getGoods();
   @observable goodsIdArr: number[] = [];
   @observable goodsInCart: IProduct[] = [];
+  @observable quantities: any = {};
 
   constructor() {
     makeObservable(this);
@@ -33,6 +34,16 @@ export class GoodsStore {
         this.allGoods.goods.find(product => product.id === productId)
     ).filter(Boolean) as IProduct[];
   }
+  // @computed get totalCost() {
+  //   let total = 0;
+  //   for (let productId in this.quantities) {
+  //     const product = this.allGoods.goods.find(product => product.id === Number(productId));
+  //     if (product) {
+  //       total += product.price * this.quantities[productId];
+  //     }
+  //   }
+  //   return total;
+  // }
 
   @action
   setGoodsInCart(goodsId: number) {
