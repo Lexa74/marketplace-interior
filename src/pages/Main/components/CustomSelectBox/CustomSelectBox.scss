@@ -1,0 +1,49 @@
+.custom-select-box {
+  position: relative;
+  min-width: 288px;
+  cursor: pointer;
+  margin: 35px 0;
+  z-index: 1;
+
+  &__selected {
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid #C4C4C4;
+    padding: 10px 10px 10px 14px;
+  }
+  &__options {
+    background: white;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+
+    &.active {
+      height: 120px;
+      border: 1px solid #C4C4C4;
+    }
+  }
+  &__option {
+    padding: 10px 10px 10px 14px;
+
+    &.active {
+      background: #C4C4C4;
+    }
+    &:hover {
+      background: #C4C4C4;
+    }
+  }
+  .select-triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    border-color: #000 transparent transparent transparent;
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    &.active {
+      transform: rotate(180deg);
+    }
+  }
+}

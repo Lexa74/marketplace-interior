@@ -1,0 +1,10 @@
+.goods {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+.wrapper-select {
+  display: flex;
+  justify-content: flex-end;
+}
