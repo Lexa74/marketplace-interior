@@ -1,0 +1,35 @@
+.product {
+  margin-bottom: 16px;
+  position: relative;
+  user-select: none;
+  &:hover {
+    .product__actions {
+      display: flex;
+    }
+  }
+  &__image {
+    object-fit: cover;
+  }
+  &__name {
+    margin: 10px 0 8px 0;
+  }
+  &__description {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #888;
+  }
+  &__price, &__name {
+    font-size: 24px;
+    color: #050505;
+    font-weight: 500;
+  }
+  &__actions {
+    cursor: pointer;
+    display: none;
+    justify-content: flex-end;
+    gap: 21px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
