@@ -1,7 +1,11 @@
 import { action, computed, makeObservable, observable } from 'mobx';
+import {IGoods, IProduct} from "../services/interfaces/goods";
+import {getGoods} from "../services/getData";
 
 export class GoodsStore {
+  @observable allGoods: IGoods = getGoods();
   @observable goodsIdArr: number[] = [];
+  @observable goodsInCart: IProduct[] = [];
 
   constructor() {
     makeObservable(this);
@@ -10,9 +14,24 @@ export class GoodsStore {
       this.goodsIdArr = JSON.parse(storedGoodsIdArr);
     }
   }
+
   @computed
-  get getGoodsInCart(): number[] {
+  get getGoods(): IGoods {
+    localStorage.setItem('goods', JSON.stringify(this.allGoods))
+    return this.allGoods
+  }
+  @computed
+  get getGoodsInCartId(): number[] {
     return this.goodsIdArr
+  }
+  @computed
+  get getGoodsInCart(): IProduct[] {
+    if(!this.goodsIdArr.length) {
+      return [];
+    }
+    return this.goodsIdArr.map(productId =>
+        this.allGoods.goods.find(product => product.id === productId)
+    ).filter(Boolean) as IProduct[];
   }
 
   @action
@@ -21,5 +40,10 @@ export class GoodsStore {
     const newSet = new Set(this.goodsIdArr);
     localStorage.setItem('countGoodsInCart', JSON.stringify(Array.from(newSet)));
     this.goodsIdArr = Array.from(newSet);
+  }
+  @action
+  clearCart() {
+    this.goodsIdArr = []
+    localStorage.setItem('countGoodsInCart', JSON.stringify([]));
   }
 }

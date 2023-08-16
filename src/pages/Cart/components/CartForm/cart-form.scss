@@ -1,0 +1,21 @@
+.cart-form {
+  width: 379px;
+  border-radius: 20px;
+  background: #F7F6F6;
+  padding: 42px 27px 148px 27px;
+
+  &__heading {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 35px;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 41px;
+    margin-bottom: 64px;
+  }
+}

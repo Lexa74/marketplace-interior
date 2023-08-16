@@ -1,0 +1,15 @@
+.input-skeleton {
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #CACDD8;
+  width: 100%;
+  padding-bottom: 3px;
+  font-family: 'Montserrat', sans-serif;
+  &::placeholder {
+    color: black;
+  }
+}

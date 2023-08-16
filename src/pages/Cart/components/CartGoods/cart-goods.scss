@@ -1,0 +1,9 @@
+.cart-goods {
+  width: 786px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 14px;
+  }
+}
