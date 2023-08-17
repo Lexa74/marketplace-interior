@@ -1,5 +1,6 @@
 .cart-form {
   width: 379px;
+  max-height: 556px;
   border-radius: 20px;
   background: #F7F6F6;
   padding: 42px 27px 148px 27px;
@@ -19,4 +20,23 @@
     gap: 41px;
     margin-bottom: 64px;
   }
+  &__total {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    gap: 5px;
+    margin-bottom: 18px;
+  }
+  &__checkout {
+    display: flex;
+    justify-content: center;
+    &_btn {
+      font-size: 16px;
+      min-width: 290px;
+    }
+  }
+}
+
+.total__price {
+  font-weight: 500;
 }

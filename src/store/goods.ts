@@ -1,12 +1,11 @@
-import { action, computed, makeObservable, observable } from 'mobx';
+import {action, computed, makeObservable, observable} from 'mobx';
 import {IGoods, IProduct} from "../services/interfaces/goods";
 import {getGoods} from "../services/getData";
 
 export class GoodsStore {
   @observable allGoods: IGoods = getGoods();
   @observable goodsIdArr: number[] = [];
-  @observable goodsInCart: IProduct[] = [];
-  @observable quantities: any = {};
+  @observable quantities: { [key: number]: number } = {};
 
   constructor() {
     makeObservable(this);
@@ -21,40 +20,47 @@ export class GoodsStore {
     localStorage.setItem('goods', JSON.stringify(this.allGoods))
     return this.allGoods
   }
+
   @computed
   get getGoodsInCartId(): number[] {
     return this.goodsIdArr
   }
+
   @computed
   get getGoodsInCart(): IProduct[] {
     if(!this.goodsIdArr.length) {
       return [];
     }
-    return this.goodsIdArr.map(productId =>
-        this.allGoods.goods.find(product => product.id === productId)
-    ).filter(Boolean) as IProduct[];
+
+    return this.goodsIdArr.map(productId => {
+      const product = this.allGoods.goods.find(product => product.id === productId);
+      if (product) {
+        product.quantities = this.quantities[productId] || 1;
+      }
+      return product;
+    }).filter(Boolean) as IProduct[];
   }
-  // @computed get totalCost() {
-  //   let total = 0;
-  //   for (let productId in this.quantities) {
-  //     const product = this.allGoods.goods.find(product => product.id === Number(productId));
-  //     if (product) {
-  //       total += product.price * this.quantities[productId];
-  //     }
-  //   }
-  //   return total;
-  // }
+
+  @action
+  setProductQuantity(productId: number, newQuantity: number) {
+    this.quantities[productId] = newQuantity;
+  }
 
   @action
   setGoodsInCart(goodsId: number) {
-    this.goodsIdArr.push(goodsId)
+    if (!this.quantities[goodsId]) {
+      this.quantities[goodsId] = 0;
+      this.goodsIdArr.push(goodsId);
+    }
     const newSet = new Set(this.goodsIdArr);
     localStorage.setItem('countGoodsInCart', JSON.stringify(Array.from(newSet)));
     this.goodsIdArr = Array.from(newSet);
   }
+
   @action
   clearCart() {
-    this.goodsIdArr = []
+    this.goodsIdArr = [];
+    this.quantities = {};
     localStorage.setItem('countGoodsInCart', JSON.stringify([]));
   }
 }

@@ -2,27 +2,37 @@ import React, {useState} from "react";
 import {ArrowUp} from "../../../ui/icons/ArrowUp";
 import {ArrowDown} from "../../../ui/icons/ArrowDown";
 import './counter.scss'
+import {useDataStore} from "../../../store/context";
 
 interface CounterProps {
     productId: number,
     min: number,
-    max: number
+    max: number,
 }
 
 export const Counter = ({productId, min, max}: CounterProps) => {
     const [valueCounter, setValueCounter] = useState(min);
+    const store = useDataStore()
 
     const onIncrement = () => {
         if(valueCounter >= max) {
             return
         }
-        setValueCounter(valueCounter + 1)
+        setValueCounter(prev => {
+            const newValue = prev + 1;
+            store.goods.setProductQuantity(productId, newValue);
+            return newValue;
+        })
     }
     const onDecrement = () => {
         if(valueCounter <= min) {
             return
         }
-        setValueCounter(valueCounter - 1)
+        setValueCounter(prev => {
+            const newValue = prev - 1;
+            store.goods.setProductQuantity(productId, newValue);
+            return newValue;
+        })
     }
     return (
         <div className='counter'>
@@ -33,4 +43,4 @@ export const Counter = ({productId, min, max}: CounterProps) => {
             </div>
         </div>
     )
-}
+};

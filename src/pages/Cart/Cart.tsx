@@ -10,36 +10,30 @@ import {CartForm} from "./components/CartForm/CartForm";
 
 export const Cart = () => {
     const store = useDataStore()
-    const onClearCart = () => {
-        store.goods.clearCart()
-    }
 
     return useObserver(() => {
         const goodsInCart = store.goods.getGoodsInCart;
         return (
             <>
                 <Header/>
-                {goodsInCart.length ? (
-                    <div className='cart'>
-                        <div className="cart-wrapper">
-                            <CartGoods goodsInCart={goodsInCart}/>
-                            <CartForm/>
-                        </div>
-                        <div className="cart-actions">
-                            <div onClick={onClearCart}>
-                                <Button variant="light">Очистить корзину</Button>
+                <div className='wrapper'>
+                    {goodsInCart.length ? (
+                        <div className='cart'>
+                            <div className="cart-wrapper">
+                                <CartGoods goodsInCart={goodsInCart}/>
+                                <CartForm/>
                             </div>
-                            <Link to='/'><Button variant="dark">Продолжить покупки</Button></Link>
                         </div>
-                    </div>
-                ) : (
-                    <div className='cart-empty'>
-                        <div>
-                            <p className='cart-empty__info'>Ваша корзина пуста</p>
-                            <Link to='/'><Button variant="dark">В каталог</Button></Link>
+                    ) : (
+                        <div className='cart-empty'>
+                            <div>
+                                <p className='cart-empty__info'>Ваша корзина пуста</p>
+                                <Link to='/'><Button variant="dark">В каталог</Button></Link>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
+
             </>
         )
     })
