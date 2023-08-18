@@ -1,0 +1,38 @@
+.btn {
+  display: flex;
+  text-align: center;
+  border-radius: 50px;
+  justify-content: center;
+  padding: 10px;
+  min-width: 200px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: .3s all;
+  @media (max-width: 475px) {
+    min-width: 166px;
+    font-size: 12px;
+  }
+  @media (max-width: 375px) {
+    width: 100%;
+  }
+
+  &.light {
+    background: transparent;
+    color: #020202;
+    border: 1px solid #000;
+    &:hover {
+      background: black;
+      color: white;
+      border-color: black;
+    }
+  }
+  &.dark {
+    color: white;
+    border: 1px solid #000;
+    background: black;
+    &:hover {
+      background: #383838;
+    }
+  }
+}

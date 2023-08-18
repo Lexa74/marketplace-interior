@@ -1,14 +1,31 @@
-header {
-  background: #CCC;
-  color: white;
+header{
   padding: 16px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #CCC;
+  color: white;
+  width: 1200px;
+  margin: 0 auto;
+  @media (max-width: 1200px) {
+    width: calc(100% - 48px);
+  }
+  @media (max-width: 475px) {
+    width: 100%;
+    padding: 50px 16px 16px;
+  }
 }
+
 nav {
   display: flex;
   gap: 32px;
+  align-items: center;
+}
+
+.logo {
+  @media (max-width: 475px) {
+    width: 100px;
+  }
 }
 
 .cart-button {

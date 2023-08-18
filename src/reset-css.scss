@@ -2,10 +2,18 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   color: black;
+}
+
+.wrapper {
   width: 1200px;
   margin: 0 auto;
   @media (max-width: 1200px) {
     width: 100%;
+    padding: 0 24px;
+  }
+  @media (max-width: 475px) {
+    width: 100%;
+    padding: 0 16px;
   }
 }
 
@@ -17,4 +25,8 @@ body {
 a {
   color: white;
   text-decoration: none;
+}
+
+img {
+  width: 100%;
 }

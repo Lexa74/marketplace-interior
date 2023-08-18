@@ -20,7 +20,7 @@ export const Product = ({ product } :ProductProps) => {
             <img className='product__image' src={enumUrls[product.id - 1]} alt=""/>
             <div className="product__name">{product.name}</div>
             <div className="product__description">{product.description}</div>
-            <div className="product__price">{product.price.toLocaleString('ru-RU')} руб</div>
+            <div className="product__price">{product.price.toLocaleString('ru-RU')} руб.</div>
             <div className='product__actions'>
                 <div onClick={() => addToCart(product.id)}>
                     <Cart/>

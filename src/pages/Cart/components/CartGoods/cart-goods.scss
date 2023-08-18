@@ -1,0 +1,35 @@
+.cart-goods {
+  width: 786px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    margin-bottom: 64px;
+  }
+  @media (max-width: 475px) {
+    margin-bottom: 48px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 14px;
+
+    @media (max-width: 475px) {
+      display: none;
+    }
+  }
+
+
+  &__actions {
+    display: flex;
+    gap: 7px;
+    margin-top: 18px;
+
+    @media (max-width: 475px) {
+      gap: 14px;
+    }
+    @media (max-width: 375px) {
+      flex-direction: column;
+    }
+  }
+}

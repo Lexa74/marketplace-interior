@@ -1,0 +1,33 @@
+.counter {
+  width: 71px;
+  height: 51px;
+  border-radius: 6px;
+  background: #F7F6F6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__value {
+    font-weight: 600;
+    font-size: 14px;
+    width: 27px;
+  }
+
+  &__plus, &__minus {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    right: -5px;
+    cursor: pointer;
+  }
+  &__plus{
+    &:hover {
+      top: -1px
+    }
+  }
+  &__minus{
+    &:hover {
+      bottom: -1px
+    }
+  }
+}
