@@ -16,14 +16,16 @@ export const Main = () => {
     return (
         <>
             <Header/>
-            <h1 className='caption'>Каталог</h1>
-            <div className="wrapper-select">
-                <CustomSelectBox onSelect={(selectSorted) => setSelectSorted(selectSorted)} selectSorted={selectSorted}/>
-            </div>
-            <div className="goods">
-                {dataSortedToPrice.goods.map((product) => (
-                    <Product product={product} key={product.id}/>
-                ))}
+            <div className="wrapper">
+                <h1 className='caption'>Каталог</h1>
+                <div className="wrapper-select">
+                    <CustomSelectBox onSelect={(selectSorted) => setSelectSorted(selectSorted)} selectSorted={selectSorted}/>
+                </div>
+                <div className="goods">
+                    {dataSortedToPrice.goods.map((product) => (
+                        <Product product={product} key={product.id}/>
+                    ))}
+                </div>
             </div>
         </>
     )

@@ -18,21 +18,21 @@ export const Counter = ({productId, min, max}: CounterProps) => {
         if(valueCounter >= max) {
             return
         }
-        setValueCounter(prev => {
-            const newValue = prev + 1;
-            store.goods.setProductQuantity(productId, newValue);
-            return newValue;
-        })
+        const newValue = valueCounter + 1;
+        store.goods.setProductQuantity(productId, newValue);
+        setTimeout(() => {
+            setValueCounter(newValue);
+        }, 0);
     }
     const onDecrement = () => {
         if(valueCounter <= min) {
             return
         }
-        setValueCounter(prev => {
-            const newValue = prev - 1;
-            store.goods.setProductQuantity(productId, newValue);
-            return newValue;
-        })
+        const newValue = valueCounter - 1;
+        store.goods.setProductQuantity(productId, newValue);
+        setTimeout(() => {
+            setValueCounter(newValue);
+        }, 0);
     }
     return (
         <div className='counter'>

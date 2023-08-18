@@ -9,6 +9,13 @@
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
   transition: .3s all;
+  @media (max-width: 475px) {
+    min-width: 166px;
+    font-size: 12px;
+  }
+  @media (max-width: 375px) {
+    width: 100%;
+  }
 
   &.light {
     background: transparent;
