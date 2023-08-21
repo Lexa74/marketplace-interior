@@ -48,13 +48,24 @@ export class GoodsStore {
 
   @action
   setGoodsInCart(goodsId: number) {
-    if (!this.quantities[goodsId]) {
-      this.quantities[goodsId] = 0;
-      this.goodsIdArr.push(goodsId);
+    if(this.goodsIdArr.indexOf(goodsId, 0) >= 0) {
+      return this.deleteFromCartById(goodsId)
     }
-    const newSet = new Set(this.goodsIdArr);
-    localStorage.setItem('countGoodsInCart', JSON.stringify(Array.from(newSet)));
-    this.goodsIdArr = Array.from(newSet);
+    console.log(this.quantities[goodsId])
+    this.quantities[goodsId] = 0;
+    this.goodsIdArr.push(goodsId);
+    localStorage.setItem('countGoodsInCart', JSON.stringify(this.goodsIdArr));
+  }
+
+  @action
+  deleteFromCartById(id: number) {
+    const deletedProduct = this.goodsIdArr.filter((idProduct) => idProduct != id);
+    if(deletedProduct.length < 1) {
+      return this.clearCart()
+    }
+    this.goodsIdArr = deletedProduct;
+    this.quantities[id] = 1
+    localStorage.setItem('countGoodsInCart', JSON.stringify(deletedProduct));
   }
 
   @action
