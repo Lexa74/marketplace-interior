@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import './product.scss'
 import { IProduct } from "../../../../services/interfaces/goods";
 import {enumUrls} from "./imageUrls";
-import {Cart} from "../../../../ui/icons/Cart";
-import {Favorite} from "../../../../ui/icons/Favorite";
+import {Cart} from "../../../../ui/icons/Cart/Cart";
+import {Favorite} from "../../../../ui/icons/Favorite/Favorite";
 import {useDataStore} from "../../../../store/context";
 
 interface ProductProps {
@@ -12,8 +12,10 @@ interface ProductProps {
 
 export const Product = ({ product } :ProductProps) => {
     const store = useDataStore()
-    const addToCart = (id: number) => {
+    const [isAddedToCart, setIsAddedToCart] = useState(false);
+    const onToggleAddToCart = (id: number) => {
         store.goods.setGoodsInCart(id)
+        setIsAddedToCart(!isAddedToCart)
     }
     return (
         <div className='product'>
@@ -22,8 +24,8 @@ export const Product = ({ product } :ProductProps) => {
             <div className="product__description">{product.description}</div>
             <div className="product__price">{product.price.toLocaleString('ru-RU')} руб.</div>
             <div className='product__actions'>
-                <div onClick={() => addToCart(product.id)}>
-                    <Cart/>
+                <div className='actions__add-to-cart' onClick={() => onToggleAddToCart(product.id)}>
+                    <Cart toggleActive={isAddedToCart}/>
                 </div>
                 <Favorite/>
             </div>

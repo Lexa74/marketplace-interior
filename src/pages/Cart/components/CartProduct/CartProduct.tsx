@@ -3,12 +3,17 @@ import './cart-product.scss'
 import {IProduct} from "../../../../services/interfaces/goods";
 import {enumUrls} from "../../../Main/components/Product/imageUrls";
 import {Counter} from "../../../../shared/components/Counter/Counter";
+import {useDataStore} from "../../../../store/context";
 
 interface CartProductProps {
     productInCart: IProduct
 }
 
 export const CartProduct = ({productInCart}: CartProductProps) => {
+    const store = useDataStore()
+    const deleteFromCart = (id: number) => {
+        store.goods.deleteFromCartById(id)
+    }
     return (
         <div className='product-in-cart'>
             <div className="product-in-cart-wrapper">
@@ -25,7 +30,7 @@ export const CartProduct = ({productInCart}: CartProductProps) => {
                     </div>
                     <div className="product-information__actions">
                         <span>Избранные</span>
-                        <span>Удалить</span>
+                        <span onClick={() => deleteFromCart(productInCart.id)}>Удалить</span>
                     </div>
                 </div>
             </div>
