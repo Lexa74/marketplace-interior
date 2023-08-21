@@ -28,10 +28,10 @@ nav {
   }
 }
 
-.cart-nav {
+.cart-nav, .favorite-nav {
   position: relative;
 
-  &__count {
+  .count {
     display: flex;
     align-items: center;
     justify-content: center;

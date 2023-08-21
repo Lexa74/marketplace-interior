@@ -1,0 +1,14 @@
+.svg-favorite {
+  cursor: pointer;
+  &.active {
+    .svg-path {
+      fill: #ff4848;
+      stroke: #ff4848;
+      stroke-width: 1px;
+    }
+  }
+}
+
+.svg-path {
+  fill: #C4C4C4;
+}

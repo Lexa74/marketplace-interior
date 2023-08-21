@@ -4,14 +4,19 @@ import {getGoods} from "../services/getData";
 
 export class GoodsStore {
   @observable allGoods: IGoods = getGoods();
-  @observable goodsIdArr: number[] = [];
+  @observable goodsToCartIdArr: number[] = [];
+  @observable goodsToFavoriteIdArr: number[] = [];
   @observable quantities: { [key: number]: number } = {};
 
   constructor() {
     makeObservable(this);
-    const storedGoodsIdArr = localStorage.getItem('countGoodsInCart');
-    if (storedGoodsIdArr) {
-      this.goodsIdArr = JSON.parse(storedGoodsIdArr);
+    const storedGoodsToFavoriteIdArr = localStorage.getItem('countGoodsInFavorite');
+    const storedGoodsToCartIdArr = localStorage.getItem('countGoodsInCart');
+    if (storedGoodsToCartIdArr) {
+      this.goodsToCartIdArr = JSON.parse(storedGoodsToCartIdArr);
+    }
+    if (storedGoodsToFavoriteIdArr) {
+      this.goodsToFavoriteIdArr = JSON.parse(storedGoodsToFavoriteIdArr);
     }
   }
 
@@ -22,22 +27,28 @@ export class GoodsStore {
   }
 
   @computed
-  get getGoodsInCartId(): number[] {
-    return this.goodsIdArr
-  }
-
-  @computed
   get getGoodsInCart(): IProduct[] {
-    if(!this.goodsIdArr.length) {
+    if(!this.goodsToCartIdArr.length) {
       return [];
     }
 
-    return this.goodsIdArr.map(productId => {
+    return this.goodsToCartIdArr.map(productId => {
       const product = this.allGoods.goods.find(product => product.id === productId);
       if (product) {
         product.quantities = this.quantities[productId] || 1;
       }
       return product;
+    }).filter(Boolean) as IProduct[];
+  }
+
+  @computed
+  get getGoodsInFavorite(): IProduct[] {
+    if(!this.goodsToFavoriteIdArr.length) {
+      return [];
+    }
+
+    return this.goodsToFavoriteIdArr.map(productId => {
+      return this.allGoods.goods.find(product => product.id === productId);
     }).filter(Boolean) as IProduct[];
   }
 
@@ -48,30 +59,46 @@ export class GoodsStore {
 
   @action
   setGoodsInCart(goodsId: number) {
-    if(this.goodsIdArr.indexOf(goodsId, 0) >= 0) {
+    if(this.goodsToCartIdArr.indexOf(goodsId, 0) >= 0) {
       return this.deleteFromCartById(goodsId)
     }
-    console.log(this.quantities[goodsId])
     this.quantities[goodsId] = 0;
-    this.goodsIdArr.push(goodsId);
-    localStorage.setItem('countGoodsInCart', JSON.stringify(this.goodsIdArr));
+    this.goodsToCartIdArr.push(goodsId);
+    localStorage.setItem('countGoodsInCart', JSON.stringify(this.goodsToCartIdArr));
+  }
+
+  @action
+  setGoodsToFavorite(goodsId: number) {
+    if(this.goodsToFavoriteIdArr.indexOf(goodsId, 0) >= 0) {
+      return this.deleteFromFavoriteById(goodsId)
+    }
+    this.goodsToFavoriteIdArr.push(goodsId);
+    localStorage.setItem('countGoodsInFavorite', JSON.stringify(this.goodsToFavoriteIdArr));
   }
 
   @action
   deleteFromCartById(id: number) {
-    const deletedProduct = this.goodsIdArr.filter((idProduct) => idProduct != id);
+    const deletedProduct = this.goodsToCartIdArr.filter((idProduct) => idProduct != id);
     if(deletedProduct.length < 1) {
       return this.clearCart()
     }
-    this.goodsIdArr = deletedProduct;
+    this.goodsToCartIdArr = deletedProduct;
     this.quantities[id] = 1
     localStorage.setItem('countGoodsInCart', JSON.stringify(deletedProduct));
   }
 
   @action
+  deleteFromFavoriteById(id: number) {
+    const deletedProduct = this.goodsToFavoriteIdArr.filter((idProduct) => idProduct != id);
+    this.goodsToFavoriteIdArr = deletedProduct;
+    localStorage.setItem('countGoodsInFavorite', JSON.stringify(deletedProduct));
+  }
+
+  @action
   clearCart() {
-    this.goodsIdArr = [];
+    this.goodsToCartIdArr = [];
     this.quantities = {};
     localStorage.setItem('countGoodsInCart', JSON.stringify([]));
   }
+
 }
