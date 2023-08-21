@@ -12,10 +12,18 @@ interface ProductProps {
 
 export const Product = ({ product } :ProductProps) => {
     const store = useDataStore()
-    const [isAddedToCart, setIsAddedToCart] = useState(false);
+    const goodsInCartId = store.goods.goodsToCartIdArr;
+    const goodsInFavoriteId = store.goods.goodsToFavoriteIdArr;
+    const [isAddedToCart, setIsAddedToCart] = useState(goodsInCartId.indexOf(product.id, 0) >= 0);
+    const [isAddedToFavorite, setIsAddedToFavorite] = useState(goodsInFavoriteId.indexOf(product.id, 0) >= 0);
+
     const onToggleAddToCart = (id: number) => {
         store.goods.setGoodsInCart(id)
         setIsAddedToCart(!isAddedToCart)
+    }
+    const onToggleAddToFavorite = (id: number) => {
+        store.goods.setGoodsToFavorite(id)
+        setIsAddedToFavorite(!isAddedToFavorite)
     }
     return (
         <div className='product'>
@@ -24,10 +32,12 @@ export const Product = ({ product } :ProductProps) => {
             <div className="product__description">{product.description}</div>
             <div className="product__price">{product.price.toLocaleString('ru-RU')} руб.</div>
             <div className='product__actions'>
-                <div className='actions__add-to-cart' onClick={() => onToggleAddToCart(product.id)}>
+                <div className='product__actions_btn' onClick={() => onToggleAddToCart(product.id)}>
                     <Cart toggleActive={isAddedToCart}/>
                 </div>
-                <Favorite/>
+                <div className="product__actions_btn" onClick={() => onToggleAddToFavorite(product.id)}>
+                    <Favorite toggleActive={isAddedToFavorite}/>
+                </div>
             </div>
         </div>
     )

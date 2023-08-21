@@ -1,0 +1,9 @@
+.svg-favorite {
+  cursor: pointer;
+  &.active {
+    .favorite-path {
+      stroke: #ff4848;
+      stroke-width: 1px;
+    }
+  }
+}

@@ -2,11 +2,10 @@ import React from "react";
 import {Header} from "../../shared/components/Header/Header";
 import {useDataStore} from "../../store/context";
 import './cart.scss'
-import {Button} from "../../shared/components/Buttons/Button/Button";
 import {useObserver} from "mobx-react";
-import {Link} from "react-router-dom";
 import {CartGoods} from "./components/CartGoods/CartGoods";
 import {CartForm} from "./components/CartForm/CartForm";
+import {EmptyDataComponent} from "../../shared/components/EmptyDataComponent/EmptyDataComponent";
 
 export const Cart = () => {
     const store = useDataStore()
@@ -24,14 +23,7 @@ export const Cart = () => {
                                 <CartForm/>
                             </div>
                         </div>
-                    ) : (
-                        <div className='cart-empty'>
-                            <div>
-                                <p className='cart-empty__info'>Ваша корзина пуста</p>
-                                <Link to='/'><Button variant="dark">В каталог</Button></Link>
-                            </div>
-                        </div>
-                    )}
+                    ) : (<EmptyDataComponent caption='Ваша корзина пуста' buttonLink='/' buttonName='В каталог'/>)}
                 </div>
 
             </>
