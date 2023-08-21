@@ -3,6 +3,13 @@
   padding-top: 10px;
   border-top: .5px solid #CACDD8;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 475px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   &__product-information {
     max-width: 276px;

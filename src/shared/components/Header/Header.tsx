@@ -38,7 +38,7 @@ export const Header = () => {
                                 <span className='count'>{goodsToCartIdArr.length}</span>
                             </Link>
                             <Link to='/favorite' className='favorite-nav'>
-                                <Favorite/>
+                                <Favorite color='#ffffff'/>
                                 <span className='count'>{goodsToFavoriteIdArr.length}</span>
                             </Link>
                         </>

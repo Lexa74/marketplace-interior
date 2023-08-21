@@ -43,7 +43,7 @@ export const FavoriteProduct = ({product}: FavoriteProductProps) => {
             </div>
             <div className="favorite-product__actions">
                 <span onClick={() => onToggleAddToCart(product.id)}>{isAddedToCart ? 'Удалить из корзины' : 'Добавить в корзину'}</span>
-                <div onClick={() => onToggleAddToFavorite(product.id)}><Favorite toggleActive={isAddedToFavorite}/></div>
+                <div onClick={() => onToggleAddToFavorite(product.id)}><Favorite toggleActive={isAddedToFavorite} /></div>
             </div>
         </div>
     )

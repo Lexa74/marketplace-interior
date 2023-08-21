@@ -19,7 +19,7 @@ export const Favorite = () => {
                 <div className="wrapper">
                     {goodsInFavorite.length ? (
                         <>
-                            <div className="favorite-container wrapper">
+                            <div className="favorite-container">
                                 {goodsInFavorite.map((product) => (
                                     <FavoriteProduct product={product} key={product.id} />
                                 ))}

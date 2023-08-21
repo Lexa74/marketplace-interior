@@ -4,6 +4,7 @@ import {IProduct} from "../../../../services/interfaces/goods";
 import {enumUrls} from "../../../Main/components/Product/imageUrls";
 import {Counter} from "../../../../shared/components/Counter/Counter";
 import {useDataStore} from "../../../../store/context";
+import {Link} from "react-router-dom";
 
 interface CartProductProps {
     productInCart: IProduct
@@ -29,7 +30,7 @@ export const CartProduct = ({productInCart}: CartProductProps) => {
                         {productInCart.price.toLocaleString('ru-RU')} руб.
                     </div>
                     <div className="product-information__actions">
-                        <span>Избранные</span>
+                        <Link to='/favorite'><span>Избранные</span></Link>
                         <span onClick={() => deleteFromCart(productInCart.id)}>Удалить</span>
                     </div>
                 </div>

@@ -78,7 +78,7 @@ export class GoodsStore {
 
   @action
   deleteFromCartById(id: number) {
-    const deletedProduct = this.goodsToCartIdArr.filter((idProduct) => idProduct != id);
+    const deletedProduct = this.goodsToCartIdArr.filter((idProduct) => idProduct !== id);
     if(deletedProduct.length < 1) {
       return this.clearCart()
     }
@@ -89,7 +89,7 @@ export class GoodsStore {
 
   @action
   deleteFromFavoriteById(id: number) {
-    const deletedProduct = this.goodsToFavoriteIdArr.filter((idProduct) => idProduct != id);
+    const deletedProduct = this.goodsToFavoriteIdArr.filter((idProduct) => idProduct !== id);
     this.goodsToFavoriteIdArr = deletedProduct;
     localStorage.setItem('countGoodsInFavorite', JSON.stringify(deletedProduct));
   }
